@@ -208,6 +208,9 @@ bool Database::removeMember(std::string memberID) {
     members.erase(memberID);
     return true;
 }
+void Database::editMember(std::string memberID) {
+
+}
 
 //////////////////// CRUD Operations for Providers ////////////////////
 /**
@@ -234,7 +237,9 @@ bool Database::removeProvider(std::string providerID) {
     providers.erase(providerID);
     return true;
 }
+void Database::editProvider(std::string providerID) {
 
+}
 //////////////////// CRUD Operations for Services ////////////////////
 /**
  * Add service to the services map
