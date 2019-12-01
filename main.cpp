@@ -1,5 +1,5 @@
 /**
- * Created by Bela, Cody Potter, Corbin Stark, Dan Scott, Forest Pearson, Max VanRaden
+ * Created by Bela, Cody Potter, Corbin Stark, Dan Scott, Forest Pearson, Max Van Raden
  */
 
 #include <iostream>
@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
                 deleteProvider(database);
                 break;
             case 'f':
-               deleteMember(database);
+                deleteMember(database);
                 break;
             case 'x':
                 break;
@@ -89,13 +89,13 @@ int main(int argc, char** argv) {
 }
 
 /*
-*
-*           HELPER FUNCTIONS
+*                                           MANAGER TERMINAL HELPER FUNCTIONS
 *   This section contains manager terminal helper functions that call database functions. Basically these just
 *   exist to make main neater. I couldn't decide which file these belong in, so I slapped 'em down here. 
-*   Feel free to put them somewhere else. 
+*   Feel free to put them somewhere else. Also, obviously to use them. 
 *   -Max
 */
+//Gathers input from user to pass to database addMember function
 void getMember(Database & database) {
     string inputName;
     string inputStreet;
@@ -118,6 +118,7 @@ void getMember(Database & database) {
     return;
 }
 
+//Same as getMember but for providers
 void getProvider(Database & database) {
     string inputName;
     string inputStreet;
@@ -141,29 +142,8 @@ void getProvider(Database & database) {
     return;
 }
 
-void deleteProvider(Database & database) {
-    string inputID;
-    char input;
-
-    cout << "\nPlease input the ID of the provider to delete: ";
-    getline(cin, inputID);
-    Provider providerToDelete = database.providers.at(inputID);
-    cout << providerToDelete.name << database.removeProvider(inputID);
-    
-    cout << "\nThat provider ID matches the following provider: " << providerToDelete.name;
-    cout << "\nAre you sure you want to delete? y/n: ";
-    cin >> input;
-    if(toupper(input) == 'Y'){
-        cout << "\nProvider has been removed";
-        database.removeProvider(inputID);
-        database.update();
-    }
-    else {
-        cout << "\nThe provider has not been removed.";
-    }
-    return;
-}
-
+//Prompts user for ID to delete, displays name to confirm with user, 
+//prompts for confirmation, deletes if confirmation is provided
 void deleteMember(Database & database) {
     string inputID;
     char input;
@@ -171,7 +151,6 @@ void deleteMember(Database & database) {
     cout << "\nPlease input the ID of the member to delete: ";
     getline(cin, inputID);
     Member memberToDelete = database.members.at(inputID);
-    cout << memberToDelete.name << database.removeMember(inputID);
     cout << "\nThat member ID matches the following member: " << memberToDelete.name;
     cout << "\nAre you sure you want to delete? y/n: ";
     cin >> input;
@@ -186,7 +165,29 @@ void deleteMember(Database & database) {
     }
     return;
 }
+//Same as deleteMember, but for providers
+void deleteProvider(Database & database) {
+    string inputID;
+    char input;
 
+    cout << "\nPlease input the ID of the provider to delete: ";
+    getline(cin, inputID);
+    Provider providerToDelete = database.providers.at(inputID);
+    cout << "\nThat provider ID matches the following provider: " << providerToDelete.name;
+    cout << "\nAre you sure you want to delete? y/n: ";
+    cin >> input;
+    if(toupper(input) == 'Y'){
+        cout << "\nProvider has been removed";
+        database.removeProvider(inputID);
+        database.update();
+    }
+    else {
+        cout << "\nThe provider has not been removed.";
+    }
+    return;
+}
+
+//prompts user for ID to pass to database editMember function
 void changeMember(Database & database) {
     string inputID;
     
@@ -196,6 +197,7 @@ void changeMember(Database & database) {
     return;
 }
 
+//Again, same as member but for provider
 void changeProvider(Database & database) {
     string inputID;
     
