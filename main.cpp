@@ -49,10 +49,10 @@ int main(int argc, char** argv) {
                 getProvider(database);
                 break;
             case 'c':
-               
+                changeMember(database);
                 break;
             case 'd':
-
+                changeProvider(database);
                 break;
             case 'e':
                 deleteProvider(database);
@@ -88,6 +88,14 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+/*
+*
+*           HELPER FUNCTIONS
+*   This section contains manager terminal helper functions that call database functions. Basically these just
+*   exist to make main neater. I couldn't decide which file these belong in, so I slapped 'em down here. 
+*   Feel free to put them somewhere else. 
+*   -Max
+*/
 void getMember(Database & database) {
     string inputName;
     string inputStreet;
@@ -176,5 +184,23 @@ void deleteMember(Database & database) {
     else {
         cout << "\nThe member has not been removed.";
     }
+    return;
+}
+
+void changeMember(Database & database) {
+    string inputID;
+    
+    cout << "\nPlease input the name of the member to edit: ";
+    getline(cin, inputID);
+    database.editMember(inputID);
+    return;
+}
+
+void changeProvider(Database & database) {
+    string inputID;
+    
+    cout << "\nPlease input the name of the provider to edit: ";
+    getline(cin, inputID);
+    database.editProvider(inputID);
     return;
 }
