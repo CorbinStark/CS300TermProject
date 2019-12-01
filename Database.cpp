@@ -208,10 +208,71 @@ bool Database::removeMember(std::string memberID) {
     members.erase(memberID);
     return true;
 }
-void Database::editMember(std::string memberID) {
-
+//Displays the member passed by member ID
+void Database::displayMember(std::string memberID) {
+    Member member = database.members.at(memberID);
+    std::cout <<"\nMember name: " << member.name << "\nMember Address: \n\t\t"; 
+    std::cout << member.street << "\n\t\t" << member.city << "\n\t\t" << member.state << "\n\t\t" << member.zip;
+    return;
 }
+void Database::editMember(std::string memberID) {
+    char choice;
+    std::string newValue;
 
+    std::cout << "\nWhat field would you like to edit for this member?\n";
+    std::cout << "\n\t(a) Name";
+    std::cout << "\n\t(b) Street";
+    std::cout << "\n\t(c) City";
+    std::cout << "\n\t(d) State";
+    std::cout << "\n\t(e) Zip";
+    std::cout << "\n\t(f) Exit without editing";
+    std::cout << "\n\nPlease enter your selection: ";
+    std::cin >> choice;
+
+    switch(tolower(choice)) {
+        case('a'):
+            std::cout << "\nPlease enter a new name: ";
+            getline(std::cin, newValue);
+            database.members.at(memberID).name = newValue;
+            database.update();
+            std::cout << "\nMember " << memberID << " now has the name " << newValue << ".";
+            break;
+        case('b'):
+            std::cout << "\nPlease enter a new street address: ";
+            getline(std::cin, newValue);
+            database.members.at(memberID).street = newValue;
+            database.update();
+            std::cout << "\nMember " << memberID << " now has the street address " << newValue << ".";
+            break;
+        case('c'):
+            std::cout << "\nPlease enter a new city: ";
+            getline(std::cin, newValue);
+            database.members.at(memberID).city = newValue;
+            database.update();
+            std::cout << "\nMember " << memberID << " now has the city " << newValue << ".";
+            break;
+        case('d'):
+            std::cout << "\nPlease enter a new state: ";
+            getline(std::cin, newValue);
+            database.members.at(memberID).state = newValue;
+            database.update();
+            std::cout << "\nMember " << memberID << " now has the state " << newValue << ".";
+            break;
+        case('e'):
+            std::cout << "\nPlease enter a new zip code: ";
+            getline(std::cin, newValue);
+            database.members.at(memberID).zip = newValue;
+            database.update();
+            std::cout << "\nMember " << memberID << " now has the zip code " << newValue << ".";
+            break;
+        case('f'):
+            std::cout << "\nNo member was edited.";
+            return;
+        default: 
+            std::cout << "\nUnknown input. No member was edited.";
+            return;
+    }
+}
 //////////////////// CRUD Operations for Providers ////////////////////
 /**
  * Add a provider to the providers map
@@ -237,8 +298,73 @@ bool Database::removeProvider(std::string providerID) {
     providers.erase(providerID);
     return true;
 }
-void Database::editProvider(std::string providerID) {
+//Displays the provider passed by providerID
+void Database::displayProvider(std::string providerID){
+    Provider provider = database.providers.at(providerID);
+    std::cout <<"\nProvider name: " << provider.name << "\nProvider Address: \n\t\t"; 
+    std::cout << provider.street << "\n\t\t" << provider.city << "\n\t\t" << provider.state << "\n\t\t" << provider.zip;
+    return;
+}
+void Database::editProvider(std::string providerID)
+{
+    char choice;
+    std::string newValue;
+    database.displayProvider(providerID);
 
+    std::cout << "\nWhat field would you like to edit for this provider?\n";
+    std::cout << "\n\t(a) Name";
+    std::cout << "\n\t(b) Street";
+    std::cout << "\n\t(c) City";
+    std::cout << "\n\t(d) State";
+    std::cout << "\n\t(e) Zip";
+    std::cout << "\n\t(f) Exit without editing";
+    std::cout << "\n\nPlease enter your selection: ";
+    std::cin >> choice;
+
+    switch (tolower(choice))
+    {
+    case ('a'):
+        std::cout << "\nPlease enter a new name: ";
+        getline(std::cin, newValue);
+        database.providers.at(providerID).name = newValue;
+        database.update();
+        std::cout << "\nProvider " << providerID << " now has the name " << newValue << ".";
+        break;
+    case ('b'):
+        std::cout << "\nPlease enter a new street address: ";
+        getline(std::cin, newValue);
+        database.providers.at(providerID).street = newValue;
+        database.update();
+        std::cout << "\nProvider " << providerID << " now has the street address " << newValue << ".";
+        break;
+    case ('c'):
+        std::cout << "\nPlease enter a new city: ";
+        getline(std::cin, newValue);
+        database.providers.at(providerID).city = newValue;
+        database.update();
+        std::cout << "\nProvider " << providerID << " now has the city " << newValue << ".";
+        break;
+    case ('d'):
+        std::cout << "\nPlease enter a new state: ";
+        getline(std::cin, newValue);
+        database.providers.at(providerID).state = newValue;
+        database.update();
+        std::cout << "\nProvider " << providerID << " now has the state " << newValue << ".";
+        break;
+    case ('e'):
+        std::cout << "\nPlease enter a new zip code: ";
+        getline(std::cin, newValue);
+        database.providers.at(providerID).zip = newValue;
+        database.update();
+        std::cout << "\nProvider " << providerID << " now has the zip code " << newValue << ".";
+        break;
+    case ('f'):
+        std::cout << "\nNo provider was edited.";
+        return;
+    default:
+        std::cout << "\nUnknown input. No provider was edited.";
+        return;
+    }
 }
 //////////////////// CRUD Operations for Services ////////////////////
 /**

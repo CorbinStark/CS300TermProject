@@ -8,6 +8,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
     Database database((char*) "data/sample-db.json");
+    
 
     cout << "Welcome to the ChocAn Simulator." << endl;
     cout << "Would you like to simulate the (m)anager terminal or the (p)rovider terminal?" << endl;
@@ -42,49 +43,22 @@ int main(int argc, char** argv) {
 
         switch(choice) {
             case 'a': 
-                cout << "\nPlease enter the name of the provider to add: ";
-                getline(cin, inputName);
-                cout << "\nPlease enter the street address of the provider to add: ";
-                getline(cin, inputStreet);
-                cout << "\nPlease enter the name of the city in which the provider is located: ";
-                getline(cin, inputCity);
-                cout << "\nPlease enter the state of the provider to add: ";
-                getline(cin, inputState);
-                cout << "\nPlease enter the zip of the provider to add: ";
-                getline(cin, inputZip);
-                database.addProvider(inputName, inputStreet, inputCity, inputState, inputZip);
-                database.update();
-                cout << "\n\nProvider added to database."
+                getMember(database);
                 break;
             case 'b':
-                cout << "\nPlease enter the name of the member to add: ";
-                getline(cin, inputName);
-                cout << "\nPlease enter the street address of the member to add: ";
-                getline(cin, inputStreet);
-                cout << "\nPlease enter the name of the city in which the member is located: ";
-                getline(cin, inputCity);
-                cout << "\nPlease enter the state of the member to add: ";
-                getline(cin, inputState);
-                cout << "\nPlease enter the zip of the member to add: ";
-                getline(cin, inputZip);
-                database.addMember(inputName, inputStreet, inputCity, inputState, inputZip);
-                database.update();
-                cout << "\n\nMember added.";
+                getProvider(database);
                 break;
             case 'c':
-
+               
                 break;
             case 'd':
+
                 break;
             case 'e':
-                cout << "\nPlease input the ID of the provider to delete: ";
-                getline(cin, inputID);
-                database.removeProvider(inputID);
+                deleteProvider(database);
                 break;
             case 'f':
-                cout << "\nPlease input the ID of the member to delete: ";
-                getline(cin, inputID);
-                database.removeMember(inputID);
+               deleteMember(database);
                 break;
             case 'x':
                 break;
@@ -112,4 +86,95 @@ int main(int argc, char** argv) {
     }
 
     return 0;
+}
+
+void getMember(Database & database) {
+    string inputName;
+    string inputStreet;
+    string inputCity;
+    string inputState;
+    string inputZip;
+    cout << "\nPlease enter the name of the member to add: ";
+    getline(cin, inputName);
+    cout << "\nPlease enter the street address of the member to add: ";
+    getline(cin, inputStreet);
+    cout << "\nPlease enter the name of the city in which the member is located: ";
+    getline(cin, inputCity);
+    cout << "\nPlease enter the state of the member to add: ";
+    getline(cin, inputState);
+    cout << "\nPlease enter the zip of the member to add: ";
+    getline(cin, inputZip);
+    database.addMember(inputName, inputStreet, inputCity, inputState, inputZip);
+    database.update();
+    cout << "\n\nMember added to database.";
+    return;
+}
+
+void getProvider(Database & database) {
+    string inputName;
+    string inputStreet;
+    string inputCity;
+    string inputState;
+    string inputZip;
+
+    cout << "\nPlease enter the name of the provider to add: ";
+    getline(cin, inputName);
+    cout << "\nPlease enter the street address of the provider to add: ";
+    getline(cin, inputStreet);
+    cout << "\nPlease enter the name of the city in which the provider is located: ";
+    getline(cin, inputCity);
+    cout << "\nPlease enter the state of the provider to add: ";
+    getline(cin, inputState);
+    cout << "\nPlease enter the zip of the provider to add: ";
+    getline(cin, inputZip);
+    database.addProvider(inputName, inputStreet, inputCity, inputState, inputZip);
+    database.update();
+    cout << "\n\nProvider added to database.";
+    return;
+}
+
+void deleteProvider(Database & database) {
+    string inputID;
+    char input;
+
+    cout << "\nPlease input the ID of the provider to delete: ";
+    getline(cin, inputID);
+    Provider providerToDelete = database.providers.at(inputID);
+    cout << providerToDelete.name << database.removeProvider(inputID);
+    
+    cout << "\nThat provider ID matches the following provider: " << providerToDelete.name;
+    cout << "\nAre you sure you want to delete? y/n: ";
+    cin >> input;
+    if(toupper(input) == 'Y'){
+        cout << "\nProvider has been removed";
+        database.removeProvider(inputID);
+        database.update();
+    }
+    else {
+        cout << "\nThe provider has not been removed.";
+    }
+    return;
+}
+
+void deleteMember(Database & database) {
+    string inputID;
+    char input;
+    
+    cout << "\nPlease input the ID of the member to delete: ";
+    getline(cin, inputID);
+    Member memberToDelete = database.members.at(inputID);
+    cout << memberToDelete.name << database.removeMember(inputID);
+    cout << "\nThat member ID matches the following member: " << memberToDelete.name;
+    cout << "\nAre you sure you want to delete? y/n: ";
+    cin >> input;
+    
+    if(toupper(input) == 'Y'){
+        cout << "\nMember has been removed";
+        database.removeMember(inputID);
+        database.update();
+    }
+    else {
+        cout << "\nThe member has not been removed.";
+    }
+    return;
 }
