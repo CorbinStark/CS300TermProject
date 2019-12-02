@@ -17,6 +17,7 @@
 #include "Provider.h"
 #include "Service.h"
 #include "ServiceEntry.h"
+#include "Helpers.h"
 
 #include <json/json.h>
 
