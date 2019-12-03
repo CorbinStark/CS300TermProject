@@ -1,6 +1,8 @@
 //Created by Max VR on 12/01/2019
 
-#include "Helpers.h"
+#include "Database.h"
+
+using namespace std;
 
 //Gathers input from user to pass to database addMember function
 void getMember(Database & database) {

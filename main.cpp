@@ -4,7 +4,17 @@
 
 #include <iostream>
 #include "Database.h"
+
+void getMember(Database & database);
+void getProvider(Database & database);
+void deleteMember(Database & database);
+void deleteProvider(Database & database);
+void changeMember(Database & database);
+void changeProvider(Database & database);
+
 using namespace std;
+
+
 
 int main(int argc, char** argv) {
     Database database((char*) "data/sample-db.json");
