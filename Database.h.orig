@@ -37,14 +37,26 @@ public:
     void printDirectory();
 
     // CRUD Operations for Members
-    void displayMember(std::string memberID);
+<<<<<<< HEAD
     std::string addMember(std::string newName, std::string newStreet, std::string newCity, std::string newState, std::string newZip);
+||||||| 8a12dab
+    void addMember(std::string newName, std::string newStreet, std::string newCity, std::string newState, std::string newZip);
+=======
+    void displayMember(std::string memberID);
+    void addMember(std::string newName, std::string newStreet, std::string newCity, std::string newState, std::string newZip);
+>>>>>>> eea8dcf62ee89644548f1975aea74481d8173afe
     bool removeMember(std::string memberID);
     void editMember(std::string memberID);
 
     // CRUD Operations for Providers
-    void displayProvider(std::string providerID);
+<<<<<<< HEAD
     std::string addProvider(std::string newName, std::string newStreet, std::string newCity, std::string newState, std::string newZip);
+||||||| 8a12dab
+    void addProvider(std::string newName, std::string newStreet, std::string newCity, std::string newState, std::string newZip);
+=======
+    void displayProvider(std::string providerID);
+    void addProvider(std::string newName, std::string newStreet, std::string newCity, std::string newState, std::string newZip);
+>>>>>>> eea8dcf62ee89644548f1975aea74481d8173afe
     bool removeProvider(std::string providerID);
     void editProvider(std::string providerID);
 
